@@ -1,0 +1,53 @@
+body{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin: 0;
+    padding: 0;
+}
+nav a{
+    color: #E2E8F0;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+nav a:hover{
+    color: #82C4FF;
+    font-family: sans-serif;
+}
+
+nav li{
+    list-style-type: none;
+    display: inline;
+    margin-left: 20px;
+}
+nav{
+    background-color: #0F172A;
+    padding: 1px;
+    border: #334155 solid 1px;
+}
+main {
+  padding: 20px;
+  background-color: #33b65a;
+}
+.title {
+  font-size: 20px;
+  padding: 100px;
+  background-image: url(../img/gudang.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+  color: white;
+}
+
+footer {
+    background-color: #2044e4;
+    text-align: center;
+}
+
+.gambar {
+    border-radius: 80px;
+    max-width: 350px; 
+    width: 100%; 
+    height: auto; 
+    margin-right: 40px;
+    padding: 70px;
+}
