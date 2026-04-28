@@ -1,28 +1,34 @@
 <?php
-include "connect.php";
+include 'connected.php';
 
-$first_name     = $_POST['first_name'];
-$last_name      = $_POST['last_name'];
-$email          = $_POST['email'];
-$username       = $_POST['username'];
-$password       = $_POST['password'];
-$con_password   = $_POST['con_password'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-// validasi password
-if ($password !== $con_password) {
-    echo "Password dan konfirmasi tidak sama!";
-    exit;
-}
+    $username     = $_POST['username'];
+    $first_name   = $_POST['first_name'];
+    $last_name    = $_POST['last_name'];
+    $email        = $_POST['email'];
+    $password     = $_POST['password'];
+    $con_password = $_POST['con_password'];
 
-// hash password
-$hash_password = password_hash($password, PASSWORD_DEFAULT);
+    // Validasi password
+    if ($password !== $con_password) {
+        die("Password tidak sama!");
+    }
 
-$query = "INSERT INTO user (username, first_name, last_name, email, password)
-          VALUES ('$username', '$first_name', '$last_name', '$email', '$hash_password')";
+    // Hash password
+    $hash = password_hash($password, PASSWORD_DEFAULT);
 
-if (mysqli_query($koneksi, $query)) {
-    echo "Registrasi berhasil! Yattaaa!";
-} else {
-    echo "Error: " . mysqli_error($koneksi);
+    // Insert ke database
+    $query = "INSERT INTO users 
+        (username, first_name, last_name, email, password) 
+        VALUES 
+        ('$username','$first_name','$last_name','$email','$hash')";
+
+    if (mysqli_query($koneksi, $query)) {
+        echo "Registrasi berhasil!";
+        header("Location: ../login.html");
+    } else {
+        echo "Error: " . mysqli_error($koneksi);
+    }
 }
 ?>

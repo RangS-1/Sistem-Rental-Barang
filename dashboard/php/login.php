@@ -1,34 +1,30 @@
 <?php
 session_start();
-include "connected.php";
+include 'connected.php';
 
-$username = $_POST['username'];
-$password = $_POST['password'];
+if (isset($_POST['login'])) {
 
-// cek apakah username ada
-$query = mysqli_query($koneksi, "SELECT * FROM users WHERE username='$username'");
+    $name = $_POST['username'];
+    $password = $_POST['password'];
 
-if (mysqli_num_rows($query) == 0) {
-    echo "Username tidak terdaftar!";
-    exit;
-}
+    $query = mysqli_query($koneksi, "SELECT * FROM users WHERE username='$name'");
+    $user = mysqli_fetch_assoc($query);
 
-$data = mysqli_fetch_assoc($query);
+    if ($user && password_verify($password, $user['password'])) {
 
-// verifikasi password
-if (password_verify($password, $data['password'])) {
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['role'] = $user['role'];
 
-    // simpan data ke session
-    $_SESSION['login']    = true;
-    $_SESSION['id_user']  = $data['id'];      // sesuaikan dengan field ID
-    $_SESSION['name']     = $data['name'];
-    $_SESSION['username'] = $data['username'];
-    $_SESSION['email']    = $data['email'];
+        if ($user['role'] == 'admin') {
+            header("Location: dashboard/php/dashboard-admin.php");
+            exit;
+        } else {
+            header("Location: dashboard/php/dashboard-user.php");
+            exit;
+        }
 
-    header("Location: dashboard-user.php");
-    exit;
-
-} else {
-    echo "Hayolo salah!";
+    } else {
+        echo "Login gagal";
+    }
 }
 ?>
