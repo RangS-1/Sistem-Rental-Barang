@@ -1,0 +1,210 @@
+/* Menggunakan font Inter agar terlihat modern dan bersih */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: all 0.25s ease;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #ffffff;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    flex-direction: row; /* Form di KIRI, Gambar di KANAN */
+}
+
+/* SISI KIRI: AREA FORMULIR */
+.form-side {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    background-color: #ffffff;
+    z-index: 10;
+}
+
+.form-wrapper {
+    width: 100%;
+    max-width: 440px;
+}
+
+.header {
+    margin-bottom: 35px;
+}
+
+.header h1 {
+    font-size: 36px;
+    font-weight: 800;
+    color: #111827;
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+}
+
+.header p {
+    color: #6b7280;
+    font-size: 16px;
+}
+
+/* INPUT STYLING */
+.input-row {
+    display: flex;
+    gap: 20px;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.input-group {
+    margin-bottom: 22px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #4b5563;
+    margin-bottom: 10px;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 12px;
+    position: relative;
+}
+
+.input-container:focus-within {
+    border-bottom: 2px solid #10b981; /* Hijau Emerald */
+}
+
+.icon {
+    width: 30px;
+    color: #9ca3af;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.input-container:focus-within .icon {
+    color: #10b981;
+}
+
+.input-container input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 16px;
+    color: #111827;
+    background: transparent;
+    font-weight: 500;
+}
+
+.input-container input::placeholder {
+    color: #d1d5db;
+}
+
+/* GARIS PEMISAH (HR) */
+hr.divider {
+    border: 0;
+    border-top: 1px solid #f3f4f6;
+    margin: 30px 0;
+}
+
+/* TOMBOL SIMPAN DATA */
+.btn-register {
+    width: 100%;
+    padding: 18px;
+    border-radius: 14px;
+    border: none;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-register:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.4);
+    filter: brightness(1.1);
+}
+
+.btn-register:active {
+    transform: translateY(0);
+}
+
+/* NAVIGASI KE LOGIN */
+.footer-nav {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.footer-nav p {
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.footer-nav a {
+    color: #1a28a8;
+    text-decoration: none;
+    font-weight: 700;
+    margin-left: 5px;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+.footer-nav a:hover {
+    background-color: rgba(16, 185, 129, 0.1);
+}
+
+/* SISI KANAN: AREA GAMBAR */
+.image-side {
+    flex: 1.4;
+    background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* Efek Overlay agar lebih estetik */
+.image-side::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to left, transparent, rgba(255,255,255,0.05));
+}
+
+/* RESPONSIVE UNTUK HP */
+@media (max-width: 992px) {
+    .image-side {
+        display: none; /* Sembunyikan gambar di layar kecil */
+    }
+    .form-side {
+        padding: 20px;
+    }
+    .form-wrapper {
+        max-width: 100%;
+    }
+    .input-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}
