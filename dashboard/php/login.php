@@ -16,10 +16,10 @@ if (isset($_POST['login'])) {
         $_SESSION['role'] = $user['role'];
 
         if ($user['role'] == 'admin') {
-            header("Location: dashboard/php/dashboard-admin.php");
+            header("Location: dashboard-admin.php");
             exit;
         } else {
-            header("Location: dashboard/php/dashboard-user.php");
+            header("Location: dashboard-user.php");
             exit;
         }
 

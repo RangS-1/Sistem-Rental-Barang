@@ -1,0 +1,124 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Body */
+body {
+    background: #f5f7f6;
+    color: #333;
+}
+
+/* Container */
+.container {
+    width: 90%;
+    margin: 30px auto;
+}
+
+/* Title */
+.title {
+    margin-bottom: 20px;
+    color: #2e7d32;
+}
+
+/* Card */
+.card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+/* Form */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.form input,
+.form textarea {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    outline: none;
+    transition: 0.2s;
+}
+
+.form input:focus,
+.form textarea:focus {
+    border-color: #4CAF50;
+}
+
+/* Button */
+.btn {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    transition: 0.2s;
+}
+
+.btn.primary {
+    background: #4CAF50;
+    color: white;
+}
+
+.btn.primary:hover {
+    background: #43a047;
+}
+
+.btn.warning {
+    background: #81c784;
+    color: #fff;
+}
+
+.btn.danger {
+    background: #e53935;
+    color: white;
+}
+
+.btn.small {
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+/* Table */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th {
+    background: #4CAF50;
+    color: white;
+    padding: 10px;
+}
+
+.table td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Badge */
+.badge {
+    padding: 5px 10px;
+    border-radius: 6px;
+    color: white;
+    font-size: 12px;
+}
+
+.available {
+    background: #4CAF50;
+}
+
+.borrowed {
+    background: #e53935;
+}
