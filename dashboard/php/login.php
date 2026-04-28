@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "connect.php";
+include "connected.php";
 
 $username = $_POST['username'];
 $password = $_POST['password'];
@@ -25,7 +25,7 @@ if (password_verify($password, $data['password'])) {
     $_SESSION['username'] = $data['username'];
     $_SESSION['email']    = $data['email'];
 
-    header("Location: dashboard.php");
+    header("Location: dashboard-user.php");
     exit;
 
 } else {
