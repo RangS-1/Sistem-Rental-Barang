@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - SPMB</title>
+    <!-- Font Awesome untuk Ikon Profesional -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Hubungkan ke file CSS register -->
+    <link rel="stylesheet" href="css/register.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Sisi Kiri: Form (Sekarang di Kiri) -->
+        <div class="form-side">
+            <div class="form-wrapper">
+                
+                <div class="header">
+                    <h1>Daftar</h1>
+                    <p>Buat akun baru Anda</p>
+                </div>
+
+                <!-- Terhubung ke PHP simpan-db -->
+                <form method="post" action="php/simpan-db.php" class="register-form">
+                    
+                    <div class="input-group">
+                        <label>Username</label>
+                        <div class="input-container">
+                            <span class="icon"><i class="fa-solid fa-at"></i></span>
+                            <input type="text" name="username" placeholder="Buat username" required>
+                        </div>
+                    </div>
+
+                    <!-- Row Nama Depan & Belakang -->
+                    <div class="input-row">
+                        <div class="input-group flex-1">
+                            <label>First Name</label>
+                            <div class="input-container">
+                                <span class="icon"><i class="fa-solid fa-user"></i></span>
+                                <input type="text" name="first_name" placeholder="Nama depan" required>
+                            </div>
+                        </div>
+                        <div class="input-group flex-1">
+                            <label>Last Name</label>
+                            <div class="input-container">
+                                <span class="icon"><i class="fa-solid fa-user"></i></span>
+                                <input type="text" name="last_name" placeholder="Nama belakang" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Email</label>
+                        <div class="input-container">
+                            <span class="icon"><i class="fa-solid fa-envelope"></i></span>
+                            <input type="email" name="email" placeholder="Alamat email aktif" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Password</label>
+                        <div class="input-container">
+                            <span class="icon"><i class="fa-solid fa-lock"></i></span>
+                            <input type="password" name="password" placeholder="Buat password" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Konfirmasi Password</label>
+                        <div class="input-container">
+                            <span class="icon"><i class="fa-solid fa-check-double"></i></span>
+                            <input type="password" name="con_password" placeholder="Ulangi password" required>
+                        </div>
+                    </div>
+
+                    <hr class="divider">
+                    <button type="submit" class="btn-register">Simpan Data</button>
+                    
+                    <div class="footer-nav">
+                        <p>Sudah punya akun? <a href="login.html">Login di sini</a></p>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <!-- Sisi Kanan: Area Gambar (Sekarang di Kanan) -->
+        <div class="image-side">
+            <!-- Background diatur di register_style.css -->
+        </div>
+    </div>
+
+</body>
+</html>
