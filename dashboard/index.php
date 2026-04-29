@@ -1,6 +1,16 @@
 <?php 
-include 'Connected.php'; 
+include 'ambil.php'; 
 $page = isset($_GET['p']) ? $_GET['p'] : 'home';
+session_start();
+
+// Jika bukan user, redirect ke dashboard admin
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'user') {
+    header("Location: dashboard-admin.php");
+    exit;
+}
+$db = new Connected();
+$conn = $db->getConnection();
+
 ?>
 
 <!DOCTYPE html>
@@ -14,9 +24,9 @@ $page = isset($_GET['p']) ? $_GET['p'] : 'home';
 <nav class="main-navbar">
     <div class="nav-container">
         <ul class="nav-links">
-            <li><a href="dashboard-user.php?p=home" class="<?= $page == 'home' ? 'active' : '' ?>">Home</a></li>
-            <li><a href="dashboard-user.php?p=katalog" class="<?= $page == 'katalog' ? 'active' : '' ?>">Barang yang Disewa</a></li>
-            <li><a href="dashboard-user.php?p=about" class="<?= $page == 'about' ? 'active' : '' ?>">About</a></li>
+            <li><a href="index.php?p=home" class="<?= $page == 'home' ? 'active' : '' ?>">Home</a></li>
+            <li><a href="index.php?p=katalog" class="<?= $page == 'katalog' ? 'active' : '' ?>">Barang yang Disewa</a></li>
+            <li><a href="index.php?p=about" class="<?= $page == 'about' ? 'active' : '' ?>">About</a></li>
         </ul>
     </div>
 </nav>
@@ -32,7 +42,7 @@ $page = isset($_GET['p']) ? $_GET['p'] : 'home';
 
             <div class="grid">
                 <?php
-                $query = mysqli_query($koneksi, "SELECT * FROM barang_sewa WHERE status = 1 LIMIT 3");
+                $query = mysqli_query($conn, "SELECT * FROM barang_sewa WHERE status = 1 LIMIT 3");
                 while ($row = mysqli_fetch_assoc($query)) {
                 ?>
                     <div class="card">
@@ -62,7 +72,7 @@ $page = isset($_GET['p']) ? $_GET['p'] : 'home';
 
             <div class="grid">
                 <?php
-                $query = mysqli_query($koneksi, "SELECT * FROM barang_sewa WHERE status = 0 LIMIT 3");
+                $query = mysqli_query($conn, "SELECT * FROM barang_sewa WHERE status = 0 LIMIT 3");
                 while ($row = mysqli_fetch_assoc($query)) {
                 ?>
                     <div class="card">
