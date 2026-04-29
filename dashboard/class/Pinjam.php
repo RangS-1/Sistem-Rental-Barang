@@ -28,5 +28,21 @@ class Pinjam {
         } else {
             $stmt->close();
             return false;
+        }
+    }
+}
 
+// Logika Eksekusi
+if (isset($_GET['id'])) {
+    $peminjaman = new Pinjam();
+    
+    if ($peminjaman->prosesPinjam($_GET['id'])) {
+        echo "<script>alert('Barang berhasil dipinjam!'); window.location='index.php?p=katalog';</script>";
+    } else {
+        echo "<script>alert('Terjadi kesalahan sistem.'); window.history.back();</script>";
+    }
+} else {
+    header("Location: index.php");
+    exit;
+}
 ?>
