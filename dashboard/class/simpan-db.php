@@ -1,8 +1,10 @@
 <?php
 include 'Connected.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+$db = new Connected();
+$conn = $db->getConnection();
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username     = $_POST['username'];
     $first_name   = $_POST['first_name'];
     $last_name    = $_POST['last_name'];
@@ -10,25 +12,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password     = $_POST['password'];
     $con_password = $_POST['con_password'];
 
-    // Validasi password
     if ($password !== $con_password) {
         die("Password tidak sama!");
     }
 
-    // Hash password
     $hash = password_hash($password, PASSWORD_DEFAULT);
 
-    // Insert ke database
-    $query = "INSERT INTO users 
-        (username, first_name, last_name, email, password) 
-        VALUES 
-        ('$username','$first_name','$last_name','$email','$hash')";
+    $stmt = $conn->prepare("INSERT INTO users (username, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssss", $username, $first_name, $last_name, $email, $hash);
 
-    if (mysqli_query($koneksi, $query)) {
-        echo "Registrasi berhasil!";
-        header("Location: ../login.html");
+    if ($stmt->execute()) {
+        echo "<script>alert('Registrasi berhasil!'); window.location='../../login.html';</script>";
     } else {
-        echo "Error: " . mysqli_error($koneksi);
+        echo "Error: " . $stmt->error;
     }
+    
+    $stmt->close();
 }
 ?>

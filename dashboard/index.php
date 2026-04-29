@@ -1,5 +1,5 @@
 <?php 
-include 'connected.php'; 
+include 'Connected.php'; 
 $page = isset($_GET['p']) ? $_GET['p'] : 'home';
 ?>
 
