@@ -6,7 +6,6 @@ class Pinjam {
     private $db;
 
     public function __construct() {
-        // Proteksi: Pastikan hanya user yang bisa mengakses fungsionalitas ini
         if (!isset($_SESSION['role']) || $_SESSION['role'] != 'user') {
             header("Location: ../../login.html");
             exit;
@@ -32,7 +31,6 @@ class Pinjam {
     }
 }
 
-// Logika Eksekusi
 if (isset($_GET['id'])) {
     $peminjaman = new Pinjam();
     

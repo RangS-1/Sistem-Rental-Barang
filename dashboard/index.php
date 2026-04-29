@@ -54,8 +54,14 @@ $conn = $db->getConnection();
                             <p class="price">Rp <?= number_format($row['harga_per_hari']); ?> <span>/ Hari</span></p>
 
                             <div class="status-wrapper">
-                                <!-- KODE PENTING: Status Tersedia (Background Hijau) -->
-                                <span class="status available">Tersedia</span>
+                                <span class="status available">
+                                    <a href="class/Pinjam.php?id=<?= $row['id_barang']; ?>" 
+                                       class="status available" 
+                                       onclick="return confirm('Apakah Anda yakin ingin meminjam barang ini?')" 
+                                       style="text-decoration: none; display: block; text-align: center;">
+                                        Pinjam Sekarang
+                                    </a>
+                                </span>
                             </div>
                         </div>
                     </div>
