@@ -47,21 +47,19 @@ $conn = $db->getConnection();
                 ?>
                     <div class="card">
                         <div class="card-img-wrapper">
-                            <img src="../../uploads/<?= $row['gambar']; ?>">
+                            <img src="../../uploads/<?= $row['gambar']; ?>" alt="<?= $row['nama_barang']; ?>">
                         </div>
                         <div class="card-body">
                             <h4><?= $row['nama_barang']; ?></h4>
                             <p class="price">Rp <?= number_format($row['harga_per_hari']); ?> <span>/ Hari</span></p>
 
                             <div class="status-wrapper">
-                                <span class="status available">
-                                    <a href="class/Pinjam.php?id=<?= $row['id_barang']; ?>" 
-                                       class="status available" 
-                                       onclick="return confirm('Apakah Anda yakin ingin meminjam barang ini?')" 
-                                       style="text-decoration: none; display: block; text-align: center;">
-                                        Pinjam Sekarang
-                                    </a>
-                                </span>
+                                <form action="class/Pinjam.php" method="GET" onsubmit="return confirm('Apakah Anda yakin ingin meminjam <?= $row['nama_barang']; ?>?')">
+                                    <input type="hidden" name="id" value="<?= $row['id']; ?>">
+                                    <button type="submit" class="btn-pinjam">
+                                        <i class="fa-solid fa-cart-plus"></i> Pinjam Sekarang
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>

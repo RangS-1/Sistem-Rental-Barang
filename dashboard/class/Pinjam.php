@@ -18,7 +18,7 @@ class Pinjam {
         $conn = $this->db->getConnection();
         
         // Menggunakan Prepared Statement untuk keamanan
-        $stmt = $conn->prepare("UPDATE barang_sewa SET status = 0 WHERE id_barang = ?");
+        $stmt = $conn->prepare("UPDATE barang_sewa SET status = 0 WHERE id = ?");
         $stmt->bind_param("i", $id);
 
         if ($stmt->execute()) {
@@ -35,7 +35,7 @@ if (isset($_GET['id'])) {
     $peminjaman = new Pinjam();
     
     if ($peminjaman->prosesPinjam($_GET['id'])) {
-        echo "<script>alert('Barang berhasil dipinjam!'); window.location='index.php?p=katalog';</script>";
+        echo "<script>alert('Barang berhasil dipinjam!'); window.location='../index.php?p=katalog';</script>";
     } else {
         echo "<script>alert('Terjadi kesalahan sistem.'); window.history.back();</script>";
     }
