@@ -1,12 +1,18 @@
 <?php
-$host = "localhost";
-$user = "root";
-$pass = ""; // password database
-$db   = "rentalin"; // nama database
+// Connect ke database phpmyadmin!
+class Connected {
+    private $hostname = "localhost";
+    private $user = "root";
+    private $pass = "";
+    private $db   = "rental_app";
 
-$koneksi = mysqli_connect($host, $user, $pass, $db);
+    public function connect() {
+        $conn = new mysqli($this->hostname, $this->user, $this->pass, $this->db);
 
-if (!$koneksi) {
-    die("Koneksi gagal: " . mysqli_connect_error());
+        if ($conn->connect_error) {
+            die("Koneksi gagal: " . $conn->connect_error);
+        }
+
+        return $conn;
+    }
 }
-?>

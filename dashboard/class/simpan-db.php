@@ -1,5 +1,5 @@
 <?php
-include 'connected.php';
+include 'Connected.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
