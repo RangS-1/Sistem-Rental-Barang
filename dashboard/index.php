@@ -7,7 +7,7 @@ $page = isset($_GET['p']) ? $_GET['p'] : 'home';
 <html>
 <head>
     <title>SewaBarang - Sistem Rental</title>
-    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
 </head>
 <body>
 <!-- Tampilan DashBoard USER!!!-->
