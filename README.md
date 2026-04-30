@@ -6,10 +6,9 @@ Tujuan dari proyek ini adalah untuk menyediakan platform manajemen inventaris da
 ---
 
 ## 🚀 Fitur Utama
-*   **Autentikasi Pengguna:** Login Admin dan Registrasi User.
-*   **Manajemen Inventaris:** Dashboard untuk mengelola daftar barang (tabel_barang).
-*   **Kategorisasi:** Pengelompokan barang berdasarkan kategori untuk pencarian mudah.
-*   **Visualisasi Data:** Dashboard interaktif untuk memantau status penyewaan.
+*   **Autentikasi Pengguna:** Login Admin dan Registrasi/Login User ke halaman Dashboard.
+*   **Manajemen Inventaris:** Dashboard untuk mengelola daftar barang (tabel barang sewa).
+*   **Visualisasi Data:** Dashboard interaktif untuk memantau status penyewaan oleh Admin.
 
 ## 🛠️ Stack Teknologi
 | Teknologi | Kegunaan |
@@ -17,7 +16,6 @@ Tujuan dari proyek ini adalah untuk menyediakan platform manajemen inventaris da
 | **PHP** | Server-side logic & API |
 | **MySQL** | Database Management (wikramart) |
 | **HTML/CSS** | Struktur & Styling Antarmuka |
-| **JavaScript** | Interaktivitas Frontend |
 
 ## 📂 Struktur Folder
 ```bash
