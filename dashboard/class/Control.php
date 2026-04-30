@@ -3,11 +3,14 @@
 require_once 'Connected.php';
 require_once 'Changer.php';
 
+$db = new Connected();
+$conn = $db->getConnection();
+
 class Control {
     private $barang;
 
     public function __construct() {
-        $db = (new Connected())->connect();
+        $db = (new Connected())->GetConnection();
         $this->barang = new Changer($db);
     }
 
