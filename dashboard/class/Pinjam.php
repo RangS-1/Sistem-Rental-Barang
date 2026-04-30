@@ -32,9 +32,9 @@ class Pinjam {
 }
 
 if (isset($_GET['id'])) {
-    $peminjaman = new Pinjam();
+    $dipinjam = new Pinjam();
     
-    if ($peminjaman->prosesPinjam($_GET['id'])) {
+    if ($dipinjam->prosesPinjam($_GET['id'])) {
         echo "<script>alert('Barang berhasil dipinjam!'); window.location='../index.php?p=katalog';</script>";
     } else {
         echo "<script>alert('Terjadi kesalahan sistem.'); window.history.back();</script>";

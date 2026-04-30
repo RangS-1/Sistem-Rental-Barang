@@ -3,11 +3,11 @@ include 'ambil.php';
 session_start();
 
 if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
-    header("Location: dashboard-user.php");
+    header("Location: index.php");
     exit;
 }
 
-require_once 'class/Controll.php';
+require_once 'class/Control.php';
 
 $pengontroll = new Control();
 $pengontroll->handleRequest();

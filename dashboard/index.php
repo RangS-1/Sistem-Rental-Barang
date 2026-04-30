@@ -3,7 +3,7 @@ include 'ambil.php';
 $page = isset($_GET['p']) ? $_GET['p'] : 'home';
 session_start();
 
-// Jika bukan user, redirect ke dashboard admin
+// Jika bukan user, masuk ke dashboard admin
 if (!isset($_SESSION['role']) || $_SESSION['role'] != 'user') {
     header("Location: dashboard-admin.php");
     exit;
@@ -26,6 +26,7 @@ $conn = $db->getConnection();
         <ul class="nav-links">
             <li><a href="index.php?p=home" class="<?= $page == 'home' ? 'active' : '' ?>">Home</a></li>
             <li><a href="index.php?p=katalog" class="<?= $page == 'katalog' ? 'active' : '' ?>">Barang yang Disewa</a></li>
+            <li><a href="index.php?p=logout" class="<?= $page == 'logout' ? 'active' : '' ?>">Logout</a></li>
             <li><a href="index.php?p=about" class="<?= $page == 'about' ? 'active' : '' ?>">About</a></li>
         </ul>
     </div>
@@ -56,8 +57,8 @@ $conn = $db->getConnection();
                             <div class="status-wrapper">
                                 <form action="class/Pinjam.php" method="GET" onsubmit="return confirm('Apakah Anda yakin ingin meminjam <?= $row['nama_barang']; ?>?')">
                                     <input type="hidden" name="id" value="<?= $row['id']; ?>">
-                                    <button type="submit" class="btn-pinjam">
-                                        <i class="fa-solid fa-cart-plus"></i> Pinjam Sekarang
+                                    <button type="submit" class="pinjam">
+                                        <i class="Text-pinjam"></i> Pinjam Sekarang
                                     </button>
                                 </form>
                             </div>
@@ -97,6 +98,10 @@ $conn = $db->getConnection();
             </div>
         </div>
 
+    <?php elseif ($page == 'logout'): ?>
+        <div class="card-body">
+            <a href="logout.php" class="logout">Logout</a>
+        </div>
     <?php elseif ($page == 'about'): ?>
         <!-- HALAMAN ABOUT -->
         <div class="page-content animate-fade">
