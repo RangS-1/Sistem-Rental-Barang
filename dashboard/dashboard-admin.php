@@ -3,7 +3,7 @@ session_start();
 include 'ambil.php';
 
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    header("Location: ../index.php"); // Naik satu tingkat folder ke index utama
+    header("Location: index.php"); // Naik satu tingkat folder ke index utama
     exit;
 }
 
@@ -106,9 +106,11 @@ $persenReady = ($totalItem > 0) ? round(($tersedia / $totalItem) * 100) : 0;
                     <table class="custom-table">
                         <thead>
                             <tr>
+                                <th>NO</th>
                                 <th>Nama Barang</th>
                                 <th>Status</th>
                                 <th>Aksi Navigasi</th>
+                                <th>Changer</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -120,7 +122,7 @@ $persenReady = ($totalItem > 0) ? round(($tersedia / $totalItem) * 100) : 0;
                                 <?php $no = 1; ?>
                                 <?php foreach ($listBarang as $item) : ?>
                                 <tr>
-                                    <td><?= $no++; ?></td> <!-- Nomor urut tampilan yang selalu rapi -->
+                                    <td><?= $no++; ?></td>
                                     <td><strong><?= htmlspecialchars($item['nama_barang']); ?></strong></td>
                                     <td><strong><?= htmlspecialchars($item['nama_barang']); ?></strong></td>
                                     <td>
@@ -145,7 +147,6 @@ $persenReady = ($totalItem > 0) ? round(($tersedia / $totalItem) * 100) : 0;
 
     </div>
 
-    <!-- SCRIPT GRAFIK CUSTOM -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const ctx = document.getElementById('rentalinChart').getContext('2d');
