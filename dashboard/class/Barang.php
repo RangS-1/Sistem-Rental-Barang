@@ -1,6 +1,6 @@
 <?php
 // Fungsi untuk ubah data
-class Changer {
+class Barang {
     private $conn;
     private $table = "barang_sewa";
 
@@ -17,7 +17,7 @@ class Changer {
         $gambar = time() . "_" . $file['gambar']['name'];
         $tmp = $file['gambar']['tmp_name'];
 
-        move_uploaded_file($tmp, "../../uploads/" . $gambar);
+        move_uploaded_file($tmp, "uploads/" . $gambar);
 
         $stmt = $this->conn->prepare(
             "INSERT INTO {$this->table}

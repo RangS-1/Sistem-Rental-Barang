@@ -6,7 +6,7 @@ include 'Connected.php';
 $db = new Connected();
 $conn = $db->conn;
 
-if (isset($_POST['login'])) {
+if (isset($_POST['user'])) {
 
     $name = $_POST['username'];
     $password = $_POST['password'];

@@ -2,7 +2,7 @@
 session_start();
 include 'Connected.php';
 
-class Pinjam {
+class Penyewaan {
     private $db;
 
     public function __construct() {

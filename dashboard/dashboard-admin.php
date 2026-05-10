@@ -117,8 +117,11 @@ $persenReady = ($totalItem > 0) ? round(($tersedia / $totalItem) * 100) : 0;
                                     <td colspan="3" style="text-align:center;">Belum ada data barang.</td>
                                 </tr>
                             <?php else: ?>
+                                <?php $no = 1; ?>
                                 <?php foreach ($listBarang as $item) : ?>
                                 <tr>
+                                    <td><?= $no++; ?></td> <!-- Nomor urut tampilan yang selalu rapi -->
+                                    <td><strong><?= htmlspecialchars($item['nama_barang']); ?></strong></td>
                                     <td><strong><?= htmlspecialchars($item['nama_barang']); ?></strong></td>
                                     <td>
                                         <span class="badge <?= ($item['status'] == 1) ? 'available' : 'borrowed'; ?>">

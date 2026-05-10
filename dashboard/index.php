@@ -48,14 +48,14 @@ $conn = $db->getConnection();
                 ?>
                     <div class="card">
                         <div class="card-img-wrapper">
-                            <img src="../../uploads/<?= $row['gambar']; ?>" alt="<?= $row['nama_barang']; ?>">
+                            <img src="uploads/<?= $row['gambar']; ?>" alt="<?= $row['nama_barang']; ?>">
                         </div>
                         <div class="card-body">
                             <h4><?= $row['nama_barang']; ?></h4>
                             <p class="price">Rp <?= number_format($row['harga_per_hari']); ?> <span>/ Hari</span></p>
 
                             <div class="status-wrapper">
-                                <form action="class/Pinjam.php" method="GET" onsubmit="return confirm('Apakah Anda yakin ingin meminjam <?= $row['nama_barang']; ?>?')">
+                                <form action="class/Penyewaan.php" method="GET" onsubmit="return confirm('Apakah Anda yakin ingin meminjam <?= $row['nama_barang']; ?>?')">
                                     <input type="hidden" name="id" value="<?= $row['id']; ?>">
                                     <button type="submit" class="pinjam">
                                         <i class="Text-pinjam"></i> Pinjam Sekarang
@@ -77,7 +77,7 @@ $conn = $db->getConnection();
 
             <div class="grid">
                 <?php
-                $query = mysqli_query($conn, "SELECT * FROM barang_sewa WHERE status = 0 LIMIT 3");
+                $query = mysqli_query($conn, "SELECT * FROM barang_sewa WHERE status = 0");
                 while ($row = mysqli_fetch_assoc($query)) {
                 ?>
                     <div class="card">
@@ -105,14 +105,31 @@ $conn = $db->getConnection();
     <?php elseif ($page == 'about'): ?>
         <!-- HALAMAN ABOUT -->
         <div class="page-content animate-fade">
-            <div class="header-section">
-                <h2>Tentang Kami</h2>
-                <p>Mengenal lebih dekat layanan SewaBarang.</p>
-            </div>
-            <div class="about-card">
-                <p>SewaBarang adalah platform penyewaan barang terpercaya yang berdiri sejak tahun 2024. Kami berdedikasi untuk memberikan pelayanan terbaik dengan unit yang selalu terawat dan sistem yang transparan.</p>
-            </div>
+    <div class="header-section">
+        <h2>Tentang Kami</h2>
+        <p>Proyek ini dikerjakan oleh Tim 7 SMK Wikrama 1 Garut.</p>
+    </div>
+    
+    <!-- Menambahkan class 'team-card' untuk spesifikasi styling -->
+    <div class="card team-card">
+        <div class="card-img-wrapper">
+            <img src="uploads/team.jpg" alt="Tim 7 SMK Wikrama 1 Garut">
         </div>
+        <div class="card-body">
+            <p>
+                Kami telah bekerja sama semaksimal mungkin untuk menyelesaikan proyek ini.
+                Anggota tim terdiri dari:
+            </p>
+            <br>
+            <ul style="list-style-type: none; margin-left: 20px; text-align: left;">
+                <li>Rangga Wijaya (RangS): Tech Lead, Bug Tester, Backend Developer</li>
+                <li>Alfi Alfatih (Denziqbal): Frontend Developer, UI/UX dashboard user, Register and Login</li>
+                <li>Rayhan Aidil (Clark): Frontend Developer, UI/UX dashboard admin</li>
+                <li>Arbiansyah (Arbian): Documentation, CSS Helper</li>
+            </ul>
+        </div>
+    </div>
+</div>
     <?php endif; ?>
 
 </div>

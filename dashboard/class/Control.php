@@ -1,7 +1,7 @@
 <?php
-// Mengontrol operasi Changer.php
+// Mengontrol operasi Barang.php
 require_once 'Connected.php';
-require_once 'Changer.php';
+require_once 'Barang.php';
 
 $db = new Connected();
 $conn = $db->getConnection();
@@ -11,7 +11,7 @@ class Control {
 
     public function __construct() {
         $db = (new Connected())->GetConnection();
-        $this->barang = new Changer($db);
+        $this->barang = new Barang($db);
     }
 
     public function handleRequest() {
