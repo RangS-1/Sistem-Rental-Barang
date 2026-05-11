@@ -82,7 +82,7 @@ $conn = $db->getConnection();
                 ?>
                     <div class="card">
                         <div class="card-img-wrapper">
-                            <img src="../../uploads/<?= $row['gambar']; ?>">
+                            <img src="uploads/<?= $row['gambar']; ?>">
                         </div>
                         <div class="card-body">
                             <h4><?= $row['nama_barang']; ?></h4>
