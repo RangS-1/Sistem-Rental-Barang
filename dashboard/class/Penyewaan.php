@@ -32,7 +32,7 @@ class Penyewaan {
 }
 
 if (isset($_GET['id'])) {
-    $dipinjam = new Pinjam();
+    $dipinjam = new Penyewaan();
     
     if ($dipinjam->prosesPinjam($_GET['id'])) {
         echo "<script>alert('Barang berhasil dipinjam!'); window.location='../index.php?p=katalog';</script>";
