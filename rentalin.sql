@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 30, 2026 at 04:06 AM
+-- Generation Time: May 11, 2026 at 05:10 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,21 +29,23 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `barang_sewa` (
   `id` int(11) NOT NULL,
+  `peminjam` int(11) DEFAULT NULL,
   `nama_barang` varchar(150) DEFAULT NULL,
   `deskripsi` text DEFAULT NULL,
   `harga_per_hari` int(11) DEFAULT NULL,
   `gambar` varchar(255) DEFAULT NULL,
   `status` tinyint(1) DEFAULT 1,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `alamat` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `barang_sewa`
 --
 
-INSERT INTO `barang_sewa` (`id`, `nama_barang`, `deskripsi`, `harga_per_hari`, `gambar`, `status`, `created_at`) VALUES
-(5, 'Thinkpad X13', 'Beh', 20000, 'Poster-MBG.png', 1, '2026-04-29 06:28:32'),
-(6, 'Toyota Avanza', 'Hanya Mobil Dawg', 345000, 'Entahlah, Masih Testing!', 0, '2026-04-29 13:17:13');
+INSERT INTO `barang_sewa` (`id`, `peminjam`, `nama_barang`, `deskripsi`, `harga_per_hari`, `gambar`, `status`, `created_at`, `alamat`) VALUES
+(8, NULL, 'Toyota Sedan', 'Bekas nan Awet', 600000, '1778511923_Toyota_Sedan.png', 1, '2026-05-11 15:05:23', NULL),
+(9, 20, 'Thinkpad X13', 'Awet dengan touchscreen', 60000, '1778512066_Thinkpad_X13.jpg', 0, '2026-05-11 15:07:46', 'SMK Wikrama 1 Garut');
 
 -- --------------------------------------------------------
 
@@ -67,8 +69,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `first_name`, `last_name`, `email`, `password`, `role`, `created_at`) VALUES
-(12, 'RangS', '1', '2', 'A@M.com', '$2y$10$nVHratdbTdGF9xeCnAe07OO.E3.YYyc8EZv/W9nBaL6DIhCh4qocW', 'user', '2026-04-29 13:06:07'),
-(13, 'Aidil', 'a', 'i', 'ai@gmail.com', '$2y$10$qC86n9LxMiHYM844M3nYLem2PlnilBTAZVWo3q0PNe8ptcyPeJqf2', 'user', '2026-04-29 13:32:19');
+(19, 'RangS', 'Rangga', 'Wijaya', 'rangga19sj@gmail.com', '$2y$10$oyeZpBzfYsDiKkzoO//2Tu8epDUBDTrhztcV4kSq7sMBCr8Pp6fkC', 'admin', '2026-05-11 15:02:27'),
+(20, 'Denz', 'Alfi', 'Alfatih', 'Alfialfatih@gmail.com', '$2y$10$VJDx/ZVkraOaKOik9s9aGeAXRt4dKaTvRGB/LIV4ydwQSDz1gq5XO', 'user', '2026-05-11 15:04:26');
 
 --
 -- Indexes for dumped tables
@@ -78,7 +80,8 @@ INSERT INTO `users` (`id`, `username`, `first_name`, `last_name`, `email`, `pass
 -- Indexes for table `barang_sewa`
 --
 ALTER TABLE `barang_sewa`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `peminjam` (`peminjam`);
 
 --
 -- Indexes for table `users`
@@ -96,13 +99,23 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `barang_sewa`
 --
 ALTER TABLE `barang_sewa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `barang_sewa`
+--
+ALTER TABLE `barang_sewa`
+  ADD CONSTRAINT `barang_sewa_ibfk_1` FOREIGN KEY (`peminjam`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
