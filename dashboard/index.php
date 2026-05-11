@@ -43,7 +43,7 @@ $conn = $db->getConnection();
 
             <div class="grid">
                 <?php
-                $query = mysqli_query($conn, "SELECT * FROM barang_sewa WHERE status = 1 LIMIT 3");
+                $query = mysqli_query($conn, "SELECT * FROM barang_sewa WHERE status = 1");
                 while ($row = mysqli_fetch_assoc($query)) {
                 ?>
                     <div class="card">
