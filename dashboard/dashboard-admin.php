@@ -3,24 +3,30 @@ session_start();
 include 'ambil.php';
 
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    header("Location: index.php"); // Naik satu tingkat folder ke index utama
+    header("Location: index.php");
     exit;
 }
-
-require_once 'class/Control.php';
 $adminControl = new Control();
 $adminControl->handleRequest();
 
-$queryBarang = mysqli_query($conn, "SELECT * FROM barang_sewa ORDER BY id DESC");
-$totalItem   = mysqli_num_rows($queryBarang);
-$tersedia    = 0;
-$disewa      = 0;
-$listBarang  = [];
+$db = new Connected();
+$barang = new Barang($db->getConnection());
 
-while ($row = mysqli_fetch_assoc($queryBarang)) {
-    $listBarang[] = $row;
-    ($row['status'] == 1) ? $tersedia++ : $disewa++;
+$listBarang = $barang->getAll();
+
+$totalItem = count($listBarang);
+$tersedia  = 0;
+$disewa    = 0;
+
+foreach ($listBarang as $row) {
+
+    if ($row['status'] == 1) {
+        $tersedia++;
+    } else {
+        $disewa++;
+    }
 }
+
 
 // Hitung persentase ketersediaan untuk widget
 $persenReady = ($totalItem > 0) ? round(($tersedia / $totalItem) * 100) : 0;
@@ -89,11 +95,11 @@ $persenReady = ($totalItem > 0) ? round(($tersedia / $totalItem) * 100) : 0;
                     <textarea name="deskripsi" placeholder="Spesifikasi atau Deskripsi singkat..." class="input-field"></textarea>
                     
                     <div class="upload-wrapper">
-                        <label>Foto Produk:</label>
+                        <label>Foto Produk disarankan 640x480p :</label>
                         <input type="file" name="gambar" required class="input-file">
                     </div>
                     
-                    <button name="tambah_barang" class="btn-submit">Simpan ke Database</button>
+                    <button name="tambah_barang" class="btn-submit" type="submit">Simpan ke Database</button>
                 </form>
             </div>
         </section>
@@ -108,9 +114,10 @@ $persenReady = ($totalItem > 0) ? round(($tersedia / $totalItem) * 100) : 0;
                             <tr>
                                 <th>NO</th>
                                 <th>Nama Barang</th>
+                                <th>Peminjam</th>
+                                <th>Alamat</th>
                                 <th>Status</th>
                                 <th>Aksi Navigasi</th>
-                                <th>Changer</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -124,7 +131,19 @@ $persenReady = ($totalItem > 0) ? round(($tersedia / $totalItem) * 100) : 0;
                                 <tr>
                                     <td><?= $no++; ?></td>
                                     <td><strong><?= htmlspecialchars($item['nama_barang']); ?></strong></td>
-                                    <td><strong><?= htmlspecialchars($item['nama_barang']); ?></strong></td>
+                                    <td>
+                                        <?php if ($item['status'] == 0): ?>
+                                            <strong>
+                                                <?= htmlspecialchars($item['username'] ?? 'Unknown'); ?>
+                                            </strong>
+                                        <?php else: ?>
+                                            -
+                                        <?php endif; ?>
+                                    </td>
+                                    <td>
+                                        <?= htmlspecialchars($item['alamat'] ?? '--_--_--'); ?>
+                                    </td>
+
                                     <td>
                                         <span class="badge <?= ($item['status'] == 1) ? 'available' : 'borrowed'; ?>">
                                             <?= ($item['status'] == 1) ? 'Tersedia' : 'Disewa'; ?>

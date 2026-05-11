@@ -55,10 +55,17 @@ $conn = $db->getConnection();
                             <p class="price">Rp <?= number_format($row['harga_per_hari']); ?> <span>/ Hari</span></p>
 
                             <div class="status-wrapper">
-                                <form action="class/Penyewaan.php" method="GET" onsubmit="return confirm('Apakah Anda yakin ingin meminjam <?= $row['nama_barang']; ?>?')">
+                                <form 
+                                    action="class/Penyewaan.php"
+                                    method="GET"
+                                    onsubmit="return prosesPinjam(this, '<?= htmlspecialchars($row['nama_barang']); ?>')"
+                                >
                                     <input type="hidden" name="id" value="<?= $row['id']; ?>">
+                                    <input type="hidden" name="alamat" class="alamat-user">
+
                                     <button type="submit" class="pinjam">
-                                        <i class="Text-pinjam"></i> Pinjam Sekarang
+                                        <i class="Text-pinjam"></i>
+                                        Pinjam Sekarang
                                     </button>
                                 </form>
                             </div>
@@ -134,5 +141,33 @@ $conn = $db->getConnection();
 
 </div>
 
+    <script>
+        function prosesPinjam(form, namaBarang) {
+
+            let yakin = confirm(
+                "Apakah Anda yakin ingin meminjam " +
+                namaBarang +
+                "?"
+            );
+
+            if (!yakin) {
+                return false;
+            }
+
+            let alamat = prompt(
+                "Masukkan alamat Anda saat ini:"
+            );
+
+            if (alamat === null || alamat.trim() === "") {
+
+                alert("Alamat wajib diisi!");
+                return false;
+            }
+
+            form.querySelector(".alamat-user").value = alamat;
+
+            return true;
+        }
+    </script>
 </body>
 </html>

@@ -26,13 +26,34 @@ class Barang {
         );
 
         $stmt->bind_param("ssis", $nama, $deskripsi, $harga, $gambar);
-        return $stmt->execute();
+
+        if (!$stmt->execute()) {
+            die($stmt->error);
+        }
+        return true;
     }
 
     // READ ALL
     public function getAll() {
-        $result = $this->conn->query("SELECT * FROM {$this->table}");
-        return $result;
+
+        $query = "
+            SELECT 
+                barang_sewa.*,
+                users.username
+            FROM barang_sewa
+            LEFT JOIN users
+            ON barang_sewa.peminjam = users.id
+        ";
+
+        $result = $this->conn->query($query);
+
+        $data = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;
+        }
+
+        return $data;
     }
 
     // DELETE
@@ -46,12 +67,31 @@ class Barang {
 
     // UPDATE STATUS
     public function toggleStatus($id) {
-        $stmt = $this->conn->prepare(
-            "UPDATE {$this->table} 
-             SET status = NOT status 
-             WHERE id=?"
-        );
+
+        $cek = $this->getById($id);
+
+        if ($cek['status'] == 0) {
+
+            // kembalikan barang
+            $stmt = $this->conn->prepare(
+                "UPDATE {$this->table}
+                SET status = 1,
+                    peminjam = NULL
+                WHERE id=?"
+            );
+
+        } else {
+
+            // tandai dipinjam manual admin
+            $stmt = $this->conn->prepare(
+                "UPDATE {$this->table}
+                SET status = 0
+                WHERE id=?"
+            );
+        }
+
         $stmt->bind_param("i", $id);
+
         return $stmt->execute();
     }
 

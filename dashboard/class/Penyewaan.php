@@ -14,27 +14,34 @@ class Penyewaan {
         $this->db = new Connected();
     }
 
-    public function prosesPinjam($id) {
+    public function prosesPinjam($id, $alamat) {
         $conn = $this->db->getConnection();
+        $user_id = $_SESSION['user_id'];
+        $alamat = $_GET['alamat'] ?? null;
         
-        // Menggunakan Prepared Statement untuk keamanan
-        $stmt = $conn->prepare("UPDATE barang_sewa SET status = 0 WHERE id = ?");
-        $stmt->bind_param("i", $id);
+        $stmt = $conn->prepare(
+            "UPDATE barang_sewa
+            SET status = 0,
+                peminjam = ?,
+                alamat = ?
+            WHERE id = ?"
+        );
 
-        if ($stmt->execute()) {
-            $stmt->close();
-            return true;
-        } else {
-            $stmt->close();
-            return false;
-        }
+        $stmt->bind_param(
+            "isi",
+            $user_id,
+            $alamat,
+            $id
+        );
+
+        return $stmt->execute();
     }
 }
 
 if (isset($_GET['id'])) {
     $dipinjam = new Penyewaan();
     
-    if ($dipinjam->prosesPinjam($_GET['id'])) {
+    if ($dipinjam->prosesPinjam($_GET['id'], $_GET['alamat'])) {
         echo "<script>alert('Barang berhasil dipinjam!'); window.location='../index.php?p=katalog';</script>";
     } else {
         echo "<script>alert('Terjadi kesalahan sistem.'); window.history.back();</script>";
